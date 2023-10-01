@@ -133,20 +133,16 @@ char	*as_get_next_line(int fd)
 	buf = malloc(BUFFER_SIZE + 1);
 	while ((rd = read(fd, buf, BUFFER_SIZE)) > 0)
 	{
-
-		// printf("buf:%s\n", buf);
 		buf[rd] = '\0';
 		temp = as_strjoin(temp, buf);
 		if (check_nl(buf))
 			break ;
 	}
+	free(buf);
 	if (rd == -1)
 		return (NULL);
-	free(buf);
 	cur_line = get_line(temp);
-	// printf("temp1:%s\n", temp);
 	temp = modify_store(temp);
-	// printf("temp2:%s\n", temp);
 	return (cur_line);
 }
 
