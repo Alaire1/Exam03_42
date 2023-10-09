@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <limits.h>
 
 int ft_putchar(char c)
 {
@@ -24,7 +25,7 @@ int ft_putstr(char *str)
     }
     return (len);
 }
-int count_len(int num, int divisor)
+int count_len(unsigned int num, int divisor)
 {
     int len = 0;
     while (num > 0)
@@ -58,10 +59,16 @@ int ft_putnbr(int nbr)
 {
     int num = nbr;
     int len = 0;
+    if (nbr < -2147483647)
+    {
+        write(1, "-2147483648", 11);
+        return (11);
+    }
     if (nbr < 0)
     {
         num = -nbr;
         len++;
+        ft_putchar('-');
     }
     len += count_len(nbr, 10);
     if (nbr > 9)
@@ -104,11 +111,11 @@ int ft_printf(const char *str, ...)
 
 int main(void)
 {
-    int num = 1347345;
+    // int num = 1347345;
     char *str = "abc";
     int result = 0;
     int result_printf = 0;
-    int test = 0;
+    // int test = 0;
     printf("String results:\n");
     result = ft_printf("my string: %s\n", str);
     ft_printf("result: %d\n", result);
@@ -124,19 +131,33 @@ int main(void)
     printf("result: %d\n\n", result_printf);
 
     printf("Decimal results:\n");
-    result = ft_printf("%d\n", num);
+    result = ft_printf("%d\n", 0);
     printf("result: %d\n", result);
     printf("-------------------\n");
-    result_printf = printf("%d\n", num);
+    result_printf = printf("%d\n", 0);
+    printf("result: %d\n\n", result_printf);
+
+    printf("Decimal results (max int):\n");
+    result = ft_printf("%d\n", INT_MAX);
+    printf("result: %d\n", result);
+    printf("-------------------\n");
+    result_printf = printf("%d\n", INT_MAX);
+    printf("result: %d\n\n", result_printf);
+
+    printf("Decimal results (min_int):\n");
+    result = ft_printf("%d\n", INT_MIN);
+    printf("result: %d\n", result);
+    printf("-------------------\n");
+    result_printf = printf("%d\n", INT_MIN);
     printf("result: %d\n\n", result_printf);
 
     // test = count_len(8888881);
     // printf("test value: %d\n", test);
     printf("Hex results:\n");
-    result = ft_printf("%x\n", num);
+    result = ft_printf("%x\n", (4294967130));
     ft_printf("result: %d\n", result);
     printf("-------------------\n");
-    result_printf = printf("%x\n", num);
+    result_printf = printf("%lx\n", (4294967130));
     printf("result: %d\n\n", result_printf);
     return (0);
 }
