@@ -60,25 +60,25 @@ int ft_print_hex(unsigned int nbr)
     return (len);
 }
 
-int ft_putnbr(int nbr)
+int ft_putnbr(long long int nbr)
 {
-    int num = nbr;
+    long long int num = nbr;
     int len = 0;
-    if (nbr < -2147483647)
-    {
-        write(1, "-2147483648", 11);
-        return (11);
-    }
+    // if (nbr < -2147483647)
+    // {
+    //     write(1, "-2147483648", 11);
+    //     return (11);
+    // }
     if (nbr < 0)
     {
         num = -nbr;
         len++;
         ft_putchar('-');
     }
-    len += count_len(nbr, 10);
-    if (nbr > 9)
-        ft_putnbr(nbr / 10);
-    ft_putchar((nbr % 10) + 48);
+    len += count_len(num, 10);
+    if (num > 9)
+        ft_putnbr(num / 10);
+    ft_putchar((num % 10) + 48);
     return(len);
 }
 
@@ -159,10 +159,10 @@ int main(void)
     // test = count_len(8888881);
     // printf("test value: %d\n", test);
     printf("Hex results:\n");
-    result = ft_printf("%x\n", (4294967130));
+    result = ft_printf("%x\n", UINT_MAX);
     ft_printf("result: %d\n", result);
     printf("-------------------\n");
-    result_printf = printf("%lx\n", (4294967130));
+    result_printf = printf("%x\n", UINT_MAX);
     printf("result: %d\n\n", result_printf);
 
     printf("Hex results (0):\n");
