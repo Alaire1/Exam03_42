@@ -69,6 +69,8 @@ int ft_putnbr(long long int nbr)
     //     write(1, "-2147483648", 11);
     //     return (11);
     // }
+    if (num == 0)
+        len = 1;
     if (nbr < 0)
     {
         num = -nbr;
@@ -128,18 +130,25 @@ int main(void)
     result_printf = printf("my string: %s\n", str);
     printf("result: %d\n\n", result_printf);
 
-    printf("Percent results:\n");
-    result = ft_printf("%%\n");
-    ft_printf("result: %d\n", result);
-    printf("-------------------\n");
-    result_printf = printf("%%\n");
-    printf("result: %d\n\n", result_printf);
+    // printf("Percent results:\n");
+    // result = ft_printf("%%\n");
+    // ft_printf("result: %d\n", result);
+    // printf("-------------------\n");
+    // result_printf = printf("%%\n");
+    // printf("result: %d\n\n", result_printf);
 
     printf("Decimal results:\n");
     result = ft_printf("%d\n", 0);
     printf("result: %d\n", result);
     printf("-------------------\n");
     result_printf = printf("%d\n", 0);
+    printf("result: %d\n\n", result_printf);
+
+    printf("Decimal negative results:\n");
+    result = ft_printf("%d\n", -35647);
+    printf("result: %d\n", result);
+    printf("-------------------\n");
+    result_printf = printf("%d\n", -35647);
     printf("result: %d\n\n", result_printf);
 
     printf("Decimal results (max int):\n");
