@@ -38,6 +38,11 @@ int count_len(unsigned int num, int divisor)
 
 int ft_print_hex(unsigned int nbr)
 {
+    if (nbr == 0)
+    {
+        write(1, "0", 1);
+        return (1);
+    }
     int i = 1;
     char *base = "0123456789abcdef";
     int len = count_len(nbr, 16);
@@ -158,6 +163,13 @@ int main(void)
     ft_printf("result: %d\n", result);
     printf("-------------------\n");
     result_printf = printf("%lx\n", (4294967130));
+    printf("result: %d\n\n", result_printf);
+
+    printf("Hex results (0):\n");
+    result = ft_printf("%x\n", 0);
+    ft_printf("result: %d\n", result);
+    printf("-------------------\n");
+    result_printf = printf("%x\n", 0);
     printf("result: %d\n\n", result_printf);
     return (0);
 }
